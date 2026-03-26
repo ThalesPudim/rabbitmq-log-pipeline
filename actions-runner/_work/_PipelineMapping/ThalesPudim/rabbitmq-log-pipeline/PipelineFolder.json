@@ -1,0 +1,12 @@
+﻿{
+  "repositoryName": "ThalesPudim/rabbitmq-log-pipeline",
+  "pipelineDirectory": "rabbitmq-log-pipeline",
+  "workspaceDirectory": "rabbitmq-log-pipeline\\rabbitmq-log-pipeline",
+  "repositories": {
+    "ThalesPudim/rabbitmq-log-pipeline": {
+      "repositoryPath": "rabbitmq-log-pipeline\\rabbitmq-log-pipeline",
+      "lastRunOn": "03/26/2026 16:13:31 -03:00"
+    }
+  },
+  "lastRunOn": "03/26/2026 16:13:31 -03:00"
+}
