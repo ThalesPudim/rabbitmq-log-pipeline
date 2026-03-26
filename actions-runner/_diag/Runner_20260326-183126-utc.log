@@ -1,0 +1,65 @@
+[2026-03-26 18:31:26Z INFO HostContext] No proxy settings were found based on environmental variables (http_proxy/https_proxy/HTTP_PROXY/HTTPS_PROXY)
+[2026-03-26 18:31:26Z INFO HostContext] Well known directory 'Bin': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner\bin'
+[2026-03-26 18:31:26Z INFO HostContext] Well known directory 'Root': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner'
+[2026-03-26 18:31:26Z INFO HostContext] Well known config file 'Credentials': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner\.credentials'
+[2026-03-26 18:31:26Z INFO HostContext] Well known directory 'Bin': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner\bin'
+[2026-03-26 18:31:26Z INFO HostContext] Well known directory 'Root': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner'
+[2026-03-26 18:31:26Z INFO HostContext] Well known config file 'Runner': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner\.runner'
+[2026-03-26 18:31:26Z INFO Listener] Runner is built for Windows (X64) - win-x64.
+[2026-03-26 18:31:26Z INFO Listener] RuntimeInformation: Microsoft Windows 10.0.26200.
+[2026-03-26 18:31:26Z INFO Listener] Version: 2.333.0
+[2026-03-26 18:31:26Z INFO Listener] Commit: 8d231aaf863e5fcdd02d35bdfda369feafd08adb
+[2026-03-26 18:31:26Z INFO Listener] Culture: pt-BR
+[2026-03-26 18:31:26Z INFO Listener] UI Culture: pt-BR
+[2026-03-26 18:31:26Z INFO HostContext] Well known directory 'Bin': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner\bin'
+[2026-03-26 18:31:26Z INFO HostContext] Well known directory 'Root': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner'
+[2026-03-26 18:31:26Z INFO Listener] Validating directory permissions for: 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner'
+[2026-03-26 18:31:26Z INFO CommandLineParser] Parse
+[2026-03-26 18:31:26Z INFO CommandLineParser] Parsing 1 args
+[2026-03-26 18:31:26Z INFO CommandLineParser] parsing argument
+[2026-03-26 18:31:26Z INFO CommandLineParser] HasArgs: False
+[2026-03-26 18:31:26Z INFO CommandLineParser] Adding Command: run
+[2026-03-26 18:31:26Z INFO Listener] Arguments parsed
+[2026-03-26 18:31:26Z INFO Runner] ExecuteCommand
+[2026-03-26 18:31:26Z INFO ConfigurationStore] currentAssemblyLocation: C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner\bin\Runner.Listener.dll
+[2026-03-26 18:31:26Z INFO HostContext] Well known directory 'Bin': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner\bin'
+[2026-03-26 18:31:26Z INFO ConfigurationStore] binPath: C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner\bin
+[2026-03-26 18:31:26Z INFO HostContext] Well known directory 'Bin': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner\bin'
+[2026-03-26 18:31:26Z INFO HostContext] Well known directory 'Root': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner'
+[2026-03-26 18:31:26Z INFO ConfigurationStore] RootFolder: C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner
+[2026-03-26 18:31:26Z INFO HostContext] Well known directory 'Bin': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner\bin'
+[2026-03-26 18:31:26Z INFO HostContext] Well known directory 'Root': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner'
+[2026-03-26 18:31:26Z INFO HostContext] Well known config file 'Runner': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner\.runner'
+[2026-03-26 18:31:26Z INFO ConfigurationStore] ConfigFilePath: C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner\.runner
+[2026-03-26 18:31:26Z INFO HostContext] Well known directory 'Bin': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner\bin'
+[2026-03-26 18:31:26Z INFO HostContext] Well known directory 'Root': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner'
+[2026-03-26 18:31:26Z INFO HostContext] Well known config file 'MigratedRunner': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner\.runner_migrated'
+[2026-03-26 18:31:26Z INFO ConfigurationStore] MigratedConfigFilePath: C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner\.runner_migrated
+[2026-03-26 18:31:26Z INFO HostContext] Well known directory 'Bin': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner\bin'
+[2026-03-26 18:31:26Z INFO HostContext] Well known directory 'Root': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner'
+[2026-03-26 18:31:26Z INFO HostContext] Well known config file 'Credentials': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner\.credentials'
+[2026-03-26 18:31:26Z INFO ConfigurationStore] CredFilePath: C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner\.credentials
+[2026-03-26 18:31:26Z INFO HostContext] Well known directory 'Bin': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner\bin'
+[2026-03-26 18:31:26Z INFO HostContext] Well known directory 'Root': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner'
+[2026-03-26 18:31:26Z INFO HostContext] Well known config file 'MigratedCredentials': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner\.credentials_migrated'
+[2026-03-26 18:31:26Z INFO ConfigurationStore] MigratedCredFilePath: C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner\.credentials_migrated
+[2026-03-26 18:31:26Z INFO HostContext] Well known directory 'Bin': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner\bin'
+[2026-03-26 18:31:26Z INFO HostContext] Well known directory 'Root': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner'
+[2026-03-26 18:31:26Z INFO HostContext] Well known config file 'Service': 'C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner\.service'
+[2026-03-26 18:31:26Z INFO ConfigurationStore] ServiceConfigFilePath: C:\Users\thale\rabbitmq-log-pipeline\rabbitmq-log-pipeline\actions-runner\.service
+[2026-03-26 18:31:26Z INFO CommandSettings] Flag 'help': 'False'
+[2026-03-26 18:31:26Z INFO CommandSettings] Flag 'version': 'False'
+[2026-03-26 18:31:26Z INFO CommandSettings] Flag 'commit': 'False'
+[2026-03-26 18:31:26Z INFO CommandSettings] Flag 'check': 'False'
+[2026-03-26 18:31:26Z INFO CommandSettings] Command 'configure': 'False'
+[2026-03-26 18:31:26Z INFO CommandSettings] Command 'remove': 'False'
+[2026-03-26 18:31:26Z INFO CommandSettings] Command 'warmup': 'False'
+[2026-03-26 18:31:26Z INFO ConfigurationManager] LoadSettings
+[2026-03-26 18:31:26Z INFO ConfigurationStore] IsConfigured()
+[2026-03-26 18:31:26Z INFO ConfigurationStore] IsConfigured: False
+[2026-03-26 18:31:26Z INFO ConfigurationManager] Is configured: False
+[2026-03-26 18:31:26Z ERR  Terminal] WRITE ERROR: An error occurred: Not configured. Run config.(sh/cmd) to configure the runner.
+[2026-03-26 18:31:26Z ERR  Listener] GitHub.Runner.Common.NonRetryableException: Not configured. Run config.(sh/cmd) to configure the runner.
+   at GitHub.Runner.Listener.Configuration.ConfigurationManager.LoadSettings()
+   at GitHub.Runner.Listener.Runner.ExecuteCommand(CommandSettings command)
+   at GitHub.Runner.Listener.Program.MainAsync(IHostContext context, String[] args)

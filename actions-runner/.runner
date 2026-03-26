@@ -1,0 +1,11 @@
+﻿{
+  "agentId": 2,
+  "agentName": "PUDANCIAS-PC",
+  "poolId": 1,
+  "poolName": "Default",
+  "serverUrl": "https://pipelinesghubeus12.actions.githubusercontent.com/bq2WEIBebpxmgx1FOAuDDDGMDKHkVtPiGLKqDhstl68r6Pdd82/",
+  "gitHubUrl": "https://github.com/ThalesPudim/rabbitmq-log-pipeline/settings/actions/runners/new?arch=x64&os=win",
+  "workFolder": "_work",
+  "useV2Flow": true,
+  "serverUrlV2": "https://broker.actions.githubusercontent.com/"
+}
