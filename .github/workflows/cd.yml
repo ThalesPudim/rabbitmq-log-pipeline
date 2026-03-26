@@ -1,0 +1,84 @@
+name: CD
+
+on:
+  # Só executa depois que o CI passar no main
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+    branches: [main]
+
+  # Permite disparo manual pela aba Actions
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy no homelab
+    runs-on: self-hosted         
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # ─────────────────────────────────────────
+      # log-producer (porta 8001)
+      # ─────────────────────────────────────────
+      - name: Deploy log-producer
+        working-directory: log-producer
+        run: |
+          git pull origin main
+          composer install --no-interaction --prefer-dist --no-progress --no-dev --optimize-autoloader
+          php artisan config:cache
+          php artisan route:cache
+          php artisan event:cache
+          php artisan migrate --force
+          # Recarrega o processo (ajuste se usar Supervisor ou apenas php artisan serve)
+          make restart || true
+
+      # ─────────────────────────────────────────
+      # log-consumer (porta 8002 + Reverb 8081)
+      # ─────────────────────────────────────────
+      - name: Deploy log-consumer
+        working-directory: log-consumer
+        run: |
+          git pull origin main
+          composer install --no-interaction --prefer-dist --no-progress --no-dev --optimize-autoloader
+          php artisan config:cache
+          php artisan route:cache
+          php artisan event:cache
+          php artisan migrate --force
+          # Reinicia o worker da fila e o Reverb
+          make restart || true
+
+      # ─────────────────────────────────────────
+      # log-dashboard (porta 5173 em dev / Vite preview)
+      # ─────────────────────────────────────────
+      - name: Deploy log-dashboard
+        working-directory: log-dashboard
+        run: |
+          git pull origin main
+          npm ci
+          npm run build
+          make restart || true
+
+      # ─────────────────────────────────────────
+      # Health checks
+      # ─────────────────────────────────────────
+      - name: Health check — log-producer (:8001)
+        run: |
+          sleep 3
+          curl --fail --silent --max-time 10 http://127.0.0.1:8001/api/logs \
+            || (echo "❌ log-producer não respondeu" && exit 1)
+
+      - name: Health check — log-consumer (:8002)
+        run: |
+          curl --fail --silent --max-time 10 http://127.0.0.1:8002/api/logs \
+            || (echo "❌ log-consumer não respondeu" && exit 1)
+
+      - name: Health check — log-dashboard (:4173)
+        run: |
+          # vite preview roda na 4173 por padrão após build
+          curl --fail --silent --max-time 10 http://127.0.0.1:4173 \
+            || (echo "⚠️  dashboard não respondeu (opcional em homelab)" && true)
+
+      - name: Deploy concluído
+        run: echo "✅ Todos os serviços atualizados em $(date '+%d/%m/%Y %H:%M')"

@@ -1,0 +1,183 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # ─────────────────────────────────────────────
+  # Lint & Static Analysis
+  # ─────────────────────────────────────────────
+  lint-php:
+    name: Lint PHP (producer + consumer)
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service: [log-producer, log-consumer]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP 8.5
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"           # use 8.3 no runner; seu homelab usa 8.5
+          extensions: sockets, pgsql, pdo_pgsql
+          tools: php-cs-fixer
+
+      - name: Cache Composer
+        uses: actions/cache@v4
+        with:
+          path: ${{ matrix.service }}/vendor
+          key: composer-${{ matrix.service }}-${{ hashFiles(format('{0}/composer.lock', matrix.service)) }}
+
+      - name: Install dependencies
+        working-directory: ${{ matrix.service }}
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: PHP CS Fixer (dry-run)
+        working-directory: ${{ matrix.service }}
+        run: |
+          php-cs-fixer fix --dry-run --diff --config=.php-cs-fixer.php \
+            || php-cs-fixer fix --dry-run --diff   # fallback sem config
+
+  lint-frontend:
+    name: Lint React (log-dashboard)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: log-dashboard/package-lock.json
+
+      - name: Install deps
+        working-directory: log-dashboard
+        run: npm ci
+
+      - name: ESLint
+        working-directory: log-dashboard
+        run: npm run lint
+
+  # ─────────────────────────────────────────────
+  # Testes automatizados
+  # ─────────────────────────────────────────────
+  test-php:
+    name: PHPUnit (${{ matrix.service }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service: [log-producer, log-consumer]
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: logs_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: secret
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP 8.5
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          extensions: sockets, pgsql, pdo_pgsql
+          coverage: none
+
+      - name: Cache Composer
+        uses: actions/cache@v4
+        with:
+          path: ${{ matrix.service }}/vendor
+          key: composer-${{ matrix.service }}-${{ hashFiles(format('{0}/composer.lock', matrix.service)) }}
+
+      - name: Install dependencies
+        working-directory: ${{ matrix.service }}
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Copy .env.testing
+        working-directory: ${{ matrix.service }}
+        run: cp .env.example .env.testing
+
+      - name: Configure test DB
+        working-directory: ${{ matrix.service }}
+        run: |
+          echo "DB_CONNECTION=pgsql"   >> .env.testing
+          echo "DB_HOST=127.0.0.1"    >> .env.testing
+          echo "DB_PORT=5432"          >> .env.testing
+          echo "DB_DATABASE=logs_test" >> .env.testing
+          echo "DB_USERNAME=postgres"  >> .env.testing
+          echo "DB_PASSWORD=secret"    >> .env.testing
+
+      - name: Generate app key
+        working-directory: ${{ matrix.service }}
+        run: php artisan key:generate --env=testing
+
+      - name: Run migrations
+        working-directory: ${{ matrix.service }}
+        run: php artisan migrate --env=testing --force
+
+      - name: PHPUnit
+        working-directory: ${{ matrix.service }}
+        run: php artisan test --env=testing
+
+  test-frontend:
+    name: Vitest (log-dashboard)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: log-dashboard/package-lock.json
+
+      - name: Install deps
+        working-directory: log-dashboard
+        run: npm ci
+
+      - name: Vitest
+        working-directory: log-dashboard
+        run: npm run test -- --run
+
+  # ─────────────────────────────────────────────
+  # Build do frontend (valida que o vite build passa)
+  # ─────────────────────────────────────────────
+  build-frontend:
+    name: Vite build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: log-dashboard/package-lock.json
+
+      - name: Install deps
+        working-directory: log-dashboard
+        run: npm ci
+
+      - name: Build
+        working-directory: log-dashboard
+        run: npm run build
+
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dashboard-dist
+          path: log-dashboard/dist/
+          retention-days: 1
